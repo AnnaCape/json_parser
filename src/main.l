@@ -16,14 +16,14 @@ FRASE {PALAVRA}([[:space:]]+{PALAVRA})*
 MESCLA {PALAVRA}[[:space:]]?{INTEIRO}?
 
 %%
-\{ { return '{'; }
+\{[\n]? { return '{'; }
 \} { return '}'; }
 \] { return ']'; }
 \[ { return '['; }
 
-\" { return '"'; }
+\"[\n]? { return '"'; }
 [:] { return ':'; }
-[,] { return ','; }
+[,][\n]? { return ','; }
 
 {FLOAT}[\n]? {return FLT;}
 {FRASE} { return STR ;}
@@ -37,3 +37,4 @@ MESCLA {PALAVRA}[[:space:]]?{INTEIRO}?
 int yywrap() {
   return 1;
 }
+
