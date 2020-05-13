@@ -13,6 +13,8 @@ INTEIRO  {DIGITO}+
 
 FLOAT {INTEIRO}([.]{INTEIRO})?
 FRASE {PALAVRA}([[:space:]]+{PALAVRA})*
+MESCLA {PALAVRA}[[:space:]]?{INTEIRO}?
+
 %%
 \{ { return '{'; }
 \} { return '}'; }
@@ -21,12 +23,13 @@ FRASE {PALAVRA}([[:space:]]+{PALAVRA})*
 
 \" { return '"'; }
 [:] { return ':'; }
-[,][\n]? { return ','; }
+[,] { return ','; }
 
 {FLOAT}[\n]? {return FLT;}
 {FRASE} { return STR ;}
-[\n] {return '\n'; }
-
+{MESCLA} { return STR ;}
+[\n]+ {return '\n'; }
+[[:space:]];
 . ;
 
 %%
